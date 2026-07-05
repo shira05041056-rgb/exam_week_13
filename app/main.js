@@ -1,5 +1,5 @@
 import { readFromJson, readFromUrl } from "./raceService.js"
-import {nameRace, } from "./service.js"
+import {nameRace, lapRace,totalCars,pitStopCompleted,carsWaiting,nextCar,radioMessage,searchByNumber} from "./service.js"
 
 function main() {
     console.log(
