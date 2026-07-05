@@ -1,37 +1,37 @@
 import { readFromJson, readFromUrl } from "./raceService.js"
 
-async function nameRace() {
+export async function nameRace() {
     const data = await readFromJson()
     console.log(data.raceName)
 }
 
 
-async function lapRace() {
+export async function lapRace() {
     const data = await readFromJson()
     console.log(`${data.currentLap} / ${data.totalLaps}`)
 }
 
-async function totalCars() {
+export async function totalCars() {
     const data = await readFromJson()
     console.log(data.cars.length)
 }
 
 
-function isCompleted(car) {
+ function isCompleted(car) {
     return car.status === "done"
 }
 
-async function pitStopCompleted() {
+export async function pitStopCompleted() {
     let data = await readFromJson()
     data = data.cars.filter(isCompleted)
     console.log(data.length)
 }
 
-function isWaiting(car) {
+ function isWaiting(car) {
     return car.status === "waiting"
 }
 
-async function carsWaiting() {
+export async function carsWaiting() {
     let data = await readFromJson()
     data = data.cars.filter(isWaiting)
     data.forEach(car => {
@@ -41,27 +41,30 @@ async function carsWaiting() {
 }
 
 
-async function nextCar() {
+export async function nextCar() {
     let data = await readFromJson()
     data = data.cars.filter(isWaiting)
     console.log(`>> Car #${data[0].carNumber} | Driver: ${data[0].driverName}`)
 
 }
 
-async function radioMessage() {
+export async function radioMessage() {
     let data = await readFromJson()
     data = data.cars.filter(isWaiting)
     console.log(`Radio message to car #${data[0].carNumber}: "Box box box, ${data[0].driverName}, pit this lap!"`)
 
 }
 
-async function searchByNumber(id) {
+export async function searchByNumber(id) {
     let data = await readFromJson()
-    data = data.cars.find((id) =>{
-        return id === data.cars.carNumber
-    })
-    console.log(data)
+    data.cars.forEach(car => {
+        if (car.carNumber === id) {
+            console.log(`Found car #${car.carNumber} | Driver: ${car.driverName} | Status: ${car.status}`)
+        } else {
+            console.log(`Error: No car found with number #${id} in the current race.`);
 
+        }
+    });
 }
 
-searchByNumber()
+

@@ -1,5 +1,5 @@
 import { readFromJson, readFromUrl } from "./raceService.js"
-
+import {nameRace, } from "./service.js"
 
 function main() {
     console.log(
